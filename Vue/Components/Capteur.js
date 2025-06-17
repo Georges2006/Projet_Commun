@@ -13,7 +13,7 @@ async function fetchData() {
         const lastUpdate = document.getElementById('last-update');
 
         if (result.success) {
-            dataContainer.innerHTML = result.data;
+            dataContainer.innerHTML = `Humidité : ${result.data}%`;
             dataContainer.style.color = 'black';
         } else {
             dataContainer.innerHTML = `Erreur : ${result.data}`;
