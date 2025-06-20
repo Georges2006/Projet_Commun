@@ -1,0 +1,82 @@
+version: '3.8'
+
+services:
+  # Serveur web PHP avec Apache
+  web:
+    build: .
+    container_name: serreconnect-web
+    ports:
+      - "8000:80"
+    volumes:
+      - .:/var/www/html
+      - ./logs:/var/log/apache2
+    depends_on:
+      - postgres
+      - mysql
+    env_file:
+      - .env
+    networks:
+      - serreconnect-network
+    restart: unless-stopped
+
+  # Base de données PostgreSQL (authentification)
+  postgres:
+    image: postgres:15-alpine
+    container_name: serreconnect-postgres
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-serreconnect}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password}
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8 --lc-collate=C --lc-ctype=C"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+    networks:
+      - serreconnect-network
+    restart: unless-stopped
+
+  # Base de données MySQL (capteurs)
+  mysql:
+    image: mysql:8.0
+    container_name: serreconnect-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: ${MYSQL_DB:-serre_connectee}
+      MYSQL_USER: ${MYSQL_USER:-g1a}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-azertyg1a}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3307:3306"
+    networks:
+      - serreconnect-network
+    restart: unless-stopped
+    command: --default-authentication-plugin=mysql_native_password
+
+  # phpMyAdmin pour gérer MySQL (optionnel)
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: serreconnect-phpmyadmin
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_USER: ${MYSQL_USER:-g1a}
+      PMA_PASSWORD: ${MYSQL_PASSWORD:-azertyg1a}
+    ports:
+      - "8080:80"
+    depends_on:
+      - mysql
+    networks:
+      - serreconnect-network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+    driver: local
+  mysql_data:
+    driver: local
+
+networks:
+  serreconnect-network:
+    driver: bridge

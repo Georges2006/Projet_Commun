@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <title>Connexion - SerreConnect</title>
+    <meta content="Connectez-vous à votre compte SerreConnect" name="description"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-brand">
+                <div class="logo">
+                    <span style="font-size: 1.5rem;">🌱</span>
+                    <span>SerreConnect</span>
+                </div>
+            </a>
+            
+            <div class="nav-menu">
+                <a href="/" class="nav-link">Accueil</a>
+                <a href="/dashboard" class="nav-link">Dashboard</a>
+                <a href="/contact" class="nav-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="auth-container">
+        <div class="auth-card">
+            <!-- Toggle between Login and Register -->
+            <div class="auth-toggle">
+                <button class="toggle-btn active" data-form="login">Connexion</button>
+                <button class="toggle-btn" data-form="register">Inscription</button>
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm" class="auth-form active">
+                <div class="form-header">
+                    <h1>Connexion</h1>
+                    <p>Connectez-vous à votre compte SerreConnect</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="loginPassword">Mot de passe</label>
+                    <div class="password-input">
+                        <input type="password" id="loginPassword" name="password" required>
+                        <button type="button" class="password-toggle" onclick="togglePassword('loginPassword')">
+                            <span>👁️</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="rememberMe" name="remember">
+                        <span class="checkmark"></span>
+                        Se souvenir de moi
+                    </label>
+                </div>
+
+                <button type="submit" class="auth-btn">
+                    <span>🔐</span>
+                    <span>Se connecter</span>
+                </button>
+
+                <div class="form-footer">
+                    <a href="#" class="forgot-password" onclick="showForgotPasswordForm()">Mot de passe oublié ?</a>
+                </div>
+            </form>
+
+            <!-- Register Form -->
+            <form id="registerForm" class="auth-form">
+                <div class="form-header">
+                    <h1>Inscription</h1>
+                    <p>Créez votre compte SerreConnect</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="registerName">Nom complet</label>
+                    <input type="text" id="registerName" name="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="registerEmail">Email</label>
+                    <input type="email" id="registerEmail" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="registerPassword">Mot de passe</label>
+                    <div class="password-input">
+                        <input type="password" id="registerPassword" name="password" required minlength="8">
+                        <button type="button" class="password-toggle" onclick="togglePassword('registerPassword')">
+                            <span>👁️</span>
+                        </button>
+                    </div>
+                    <div class="password-strength" id="registerPasswordStrength"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">Confirmer le mot de passe</label>
+                    <div class="password-input">
+                        <input type="password" id="confirmPassword" name="confirmPassword" required minlength="8">
+                        <button type="button" class="password-toggle" onclick="togglePassword('confirmPassword')">
+                            <span>👁️</span>
+                        </button>
+                    </div>
+                    <div class="password-match" id="registerPasswordMatch"></div>
+                </div>
+
+                <div class="form-group checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
+                        <span class="checkmark"></span>
+                        J'accepte les <a href="/terms" target="_blank">conditions d'utilisation</a>
+                    </label>
+                </div>
+
+                <button type="submit" class="auth-btn">
+                    <span>📝</span>
+                    <span>Créer un compte</span>
+                </button>
+            </form>
+
+            <!-- Forgot Password Form -->
+            <form id="forgotPasswordForm" class="auth-form">
+                <div class="form-header">
+                    <h1>Mot de passe oublié</h1>
+                    <p>Entrez votre email pour recevoir un lien de réinitialisation</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="forgotEmail">Email</label>
+                    <input type="email" id="forgotEmail" name="email" required>
+                </div>
+
+                <button type="submit" class="auth-btn">
+                    <span>📧</span>
+                    <span>Envoyer le lien</span>
+                </button>
+
+                <div class="form-footer">
+                    <a href="#" onclick="showLoginForm()">Retour à la connexion</a>
+                </div>
+            </form>
+
+            <!-- Email Verification Form -->
+            <form id="verificationForm" class="auth-form">
+                <div class="form-header">
+                    <h1>Vérification de compte</h1>
+                    <p>Entrez le code reçu par email pour activer votre compte</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="verificationEmail">Email</label>
+                    <input type="email" id="verificationEmail" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="verificationCode">Code de vérification</label>
+                    <input type="text" id="verificationCode" name="code" required maxlength="6" pattern="[0-9]{6}">
+                </div>
+
+                <button type="submit" class="auth-btn">
+                    <span>✅</span>
+                    <span>Vérifier mon compte</span>
+                </button>
+
+                <div class="form-footer">
+                    <a href="#" onclick="showLoginForm()">Retour à la connexion</a>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Notifications Container -->
+    <div id="notificationsContainer" class="notifications-container"></div>
+
+    <script src="login.js"></script>
+</body>
+</html>

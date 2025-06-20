@@ -1,0 +1,29 @@
+ # Logs
+logs/
+*.log
+
+# Variables d'environnement
+.env
+.env.local
+.env.production
+
+# Fichiers temporaires
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+
+# Fichiers de cache
+.cache/
+cache/
+
+# Fichiers de backup
+*.bak
+*.backup
+
+# Fichiers de test
+test_*
+*test*
+
+# Fichiers Docker (optionnel - garder pour le développement)
+# docker-compose.override.yml

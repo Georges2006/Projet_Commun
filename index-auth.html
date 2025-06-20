@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <title>SerreConnect - Gestion Intelligente de Serre</title>
+    <meta content="SerreConnect est une plateforme moderne pour la gestion intelligente de serres connectées. Surveillez l'humidité, la température et la luminosité en temps réel." name="description"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-brand">
+                <div class="logo">
+                    <span style="font-size: 1.5rem;">🌱</span>
+                    <span>SerreConnect</span>
+                </div>
+            </a>
+            
+            <div class="nav-menu" id="nav-menu">
+                <a href="/" class="nav-link current">Accueil</a>
+                <!-- <a href="/dashboard.html" class="nav-link">Dashboard</a> -->
+                <a href="/gestion.html" class="nav-link admin-only" style="display: none;">Gestion</a>
+                <a href="/capteurs.html" class="nav-link">Capteurs</a>
+                <a href="/contact.html" class="nav-link">Contact</a>
+                <a href="/login.html" class="nav-link auth-link" id="authLink">Connexion</a>
+                <a href="/dashboard.html" class="nav-button" id="dashboardBtn" style="display: none;">
+                    <span>📊</span>
+                    <span>Dashboard</span>
+                </a>
+            </div>
+            
+            <div class="menu-toggle" id="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content fade-in-up">
+                <h1>Gestion intelligente de votre serre</h1>
+                <p>Surveillez l'humidité des sols, la température et la luminosité en temps réel. Optimisez vos cultures avec des données précises et des alertes intelligentes.</p>
+                <div class="hero-buttons">
+                    <a href="/dashboard.html" class="btn btn-primary">
+                        <span>📊</span>
+                        <span>Accéder au Dashboard</span>
+                    </a>
+                    <a href="#features" class="btn btn-secondary">
+                        <span>🌱</span>
+                        <span>Découvrir les fonctionnalités</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistiques en temps réel -->
+    <section class="stats">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Surveillance en temps réel</h2>
+                <p class="section-subtitle">Notre système de capteurs connectés vous permet de surveiller tous les paramètres essentiels à la croissance optimale de vos plantes.</p>
+            </div>
+            
+            <!-- <div class="stats-grid">
+                <div class="stat-card fade-in-up">
+                    <div class="stat-number" id="humidityStat">75</div>
+                    <div class="stat-label">Humidité du sol (%)</div>
+                </div>
+                <div class="stat-card fade-in-up">
+                    <div class="stat-number" id="temperatureStat">22</div>
+                    <div class="stat-label">Température (°C)</div>
+                </div>
+                <div class="stat-card fade-in-up">
+                    <div class="stat-number" id="lightStat">450</div>
+                    <div class="stat-label">Luminosité (lux)</div>
+                </div>
+                <div class="stat-card fade-in-up">
+                    <div class="stat-number">99</div>
+                    <div class="stat-label">Précision (%)</div>
+                </div>
+            </div> -->
+        </div>
+    </section>
+
+    <!-- Fonctionnalités -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Pourquoi choisir notre système</h2>
+                <p class="section-subtitle">Une solution complète pour optimiser la gestion de votre serre et maximiser vos rendements.</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card fade-in-up">
+                    <span class="feature-icon">💧</span>
+                    <h3 class="feature-title">Surveillance de l'humidité</h3>
+                    <p class="feature-description">Contrôlez précisément l'humidité des sols avec nos capteurs spécialisés pour optimiser l'arrosage et la croissance des plantes.</p>
+                </div>
+                
+                <div class="feature-card fade-in-up">
+                    <span class="feature-icon">🌡️</span>
+                    <h3 class="feature-title">Contrôle de la température</h3>
+                    <p class="feature-description">Surveillez et régulez la température ambiante pour créer l'environnement optimal pour vos cultures.</p>
+                </div>
+                
+                <div class="feature-card fade-in-up">
+                    <span class="feature-icon">☀️</span>
+                    <h3 class="feature-title">Gestion de la luminosité</h3>
+                    <p class="feature-description">Optimisez l'exposition lumineuse de vos plantes avec des capteurs de luminosité haute précision.</p>
+                </div>
+                
+                <div class="feature-card fade-in-up">
+                    <span class="feature-icon">📱</span>
+                    <h3 class="feature-title">Interface intuitive</h3>
+                    <p class="feature-description">Accédez à vos données depuis n'importe où avec notre interface web moderne et responsive.</p>
+                </div>
+                
+                <div class="feature-card fade-in-up">
+                    <span class="feature-icon">🔔</span>
+                    <h3 class="feature-title">Alertes intelligentes</h3>
+                    <p class="feature-description">Recevez des notifications en temps réel lorsque les paramètres dépassent les seuils définis.</p>
+                </div>
+                
+                <div class="feature-card fade-in-up">
+                    <span class="feature-icon">📊</span>
+                    <h3 class="feature-title">Analyses détaillées</h3>
+                    <p class="feature-description">Analysez les tendances et optimisez vos pratiques culturales grâce à nos graphiques et rapports.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Aperçu du Dashboard -->
+    <!-- <section class="dashboard-preview">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Aperçu du Dashboard</h2>
+                <p class="section-subtitle">Découvrez l'interface moderne et intuitive de notre plateforme de gestion.</p>
+            </div>
+            
+            <div class="preview-card fade-in-up">
+                <div class="preview-header">
+                    <div class="preview-title">Dashboard SerreConnect</div>
+                    <div class="preview-status">
+                        <div class="status-dot"></div>
+                        <span>Système en ligne</span>
+                    </div>
+                </div>
+                
+                <div class="preview-content">
+                    <div class="sensor-grid">
+                        <div class="sensor-card">
+                            <div class="sensor-value" id="humidityValue">75%</div>
+                            <div class="sensor-label">Humidité</div>
+                        </div>
+                        <div class="sensor-card">
+                            <div class="sensor-value" id="temperatureValue">22°C</div>
+                            <div class="sensor-label">Température</div>
+                        </div>
+                        <div class="sensor-card">
+                            <div class="sensor-value" id="lightValue">450 lux</div>
+                            <div class="sensor-label">Luminosité</div>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <div style="text-align: center;">
+                            <div style="font-size: 3rem; margin-bottom: 1rem;">📈</div>
+                            <div>Graphiques en temps réel</div>
+                            <div style="font-size: 0.875rem; margin-top: 0.5rem; opacity: 0.7;">Données historiques et tendances</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>🌱 SerreConnect</h3>
+                    <p>Plateforme moderne pour la gestion intelligente de serres connectées. Optimisez vos cultures avec des données précises.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Pages</h3>
+                    <p><a href="/">Accueil</a></p>
+                    <p><a href="/dashboard">Dashboard</a></p>
+                    <p><a href="/gestion" class="admin-only" style="display: none;">Gestion</a></p>
+                    <p><a href="/capteurs">Capteurs</a></p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Fonctionnalités</h3>
+                    <p><a href="/dashboard">Surveillance temps réel</a></p>
+                    <p><a href="/alertes">Système d'alertes</a></p>
+                    <p><a href="/meteo">Intégration météo</a></p>
+                    <p><a href="/rapports">Rapports détaillés</a></p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>📧 contact@serreconnect.fr</p>
+                    <p>📍 France</p>
+                    <p>📱 Support 24/7</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2025 SerreConnect - Projet commun ISEP. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="auth.js"></script>
+    <script>
+        // Navigation scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const navMenu = document.getElementById('nav-menu');
+        
+        menuToggle.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements with fade-in-up class
+        document.querySelectorAll('.fade-in-up').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

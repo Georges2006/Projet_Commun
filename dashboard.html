@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <title>Dashboard - SerreConnect</title>
+    <meta content="Dashboard de surveillance en temps réel de votre serre connectée" name="description"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-brand">
+                <div class="logo">
+                    <span style="font-size: 1.5rem;">🌱</span>
+                    <span>SerreConnect</span>
+                </div>
+            </a>
+            
+            <div class="nav-menu" id="nav-menu">
+                <a href="/" class="nav-link">Accueil</a>
+                <a href="/capteurs.html" class="nav-link">Capteurs</a>
+                <a href="/contact.html" class="nav-link">Contact</a>
+                <a href="/login.html" class="nav-link auth-link" id="authLink">Connexion</a>
+                <a href="/gestion.html" class="nav-button" id="dashboardBtn" style="display: none;">
+                    <span>⚙️</span>
+                    <span>Gestion</span>
+                </a>
+            </div>
+            
+            <div class="menu-toggle" id="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Dashboard Header -->
+        <div class="dashboard-header">
+            <h1 class="dashboard-title">Dashboard SerreConnect</h1>
+            <p class="dashboard-subtitle">Surveillance en temps réel de votre serre connectée</p>
+        </div>
+
+        <!-- Main Dashboard Grid -->
+        <div class="dashboard-grid">
+            <!-- Left Column - Main Content -->
+            <div class="dashboard-main">
+                <!-- Sensor Values -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h2 class="card-title">Valeurs actuelles</h2>
+                        <div class="card-actions">
+                            <span class="status online">● En ligne</span>
+                            <button class="action-btn" onclick="refreshData()">🔄</button>
+                        </div>
+                    </div>
+                    
+                    <div class="sensor-grid">
+                        <div class="sensor-card">
+                            <div class="sensor-value humidity" id="humidityValue">75%</div>
+                            <div class="sensor-label">Humidité du sol</div>
+                            <div class="sensor-trend trend-up" id="humidityTrend">↗ +2%</div>
+                        </div>
+                        
+                        <div class="sensor-card">
+                            <div class="sensor-value temperature" id="temperatureValue">22°C</div>
+                            <div class="sensor-label">Température</div>
+                            <div class="sensor-trend trend-stable" id="temperatureTrend">→ 0°C</div>
+                        </div>
+                        
+                        <div class="sensor-card">
+                            <div class="sensor-value light" id="lightValue">450 lux</div>
+                            <div class="sensor-label">Luminosité</div>
+                            <div class="sensor-trend trend-down" id="lightTrend">↘ -15 lux</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h2 class="card-title">Graphiques en temps réel</h2>
+                        <div class="card-actions">
+                            <button class="time-btn active" data-period="24h">24h</button>
+                            <button class="time-btn" data-period="7d">7j</button>
+                            <button class="time-btn" data-period="30d">30j</button>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <canvas id="humidityChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Historical Data -->
+                <div class="history-section">
+                    <div class="history-header">
+                        <h2 class="history-title">Données historiques</h2>
+                        <div class="history-controls">
+                            <button class="btn-details" onclick="exportHistoricalData()">📊 Exporter</button>
+                        </div>
+                    </div>
+                    
+                    <table class="history-table">
+                        <thead>
+                            <tr>
+                                <th>Heure</th>
+                                <th>Humidité</th>
+                                <th>Température</th>
+                                <th>Luminosité</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="historicalTableBody">
+                            <tr>
+                                <td>10:00</td>
+                                <td>68%</td>
+                                <td>21°C</td>
+                                <td>480 lux</td>
+                                <td><button class="btn-details" onclick="viewDetails('10:00')">Voir</button></td>
+                            </tr>
+                            <tr>
+                                <td>11:00</td>
+                                <td>65%</td>
+                                <td>22°C</td>
+                                <td>520 lux</td>
+                                <td><button class="btn-details" onclick="viewDetails('11:00')">Voir</button></td>
+                            </tr>
+                            <tr>
+                                <td>12:00</td>
+                                <td>62%</td>
+                                <td>24°C</td>
+                                <td>600 lux</td>
+                                <td><button class="btn-details" onclick="viewDetails('12:00')">Voir</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Right Column - Sidebar -->
+            <div class="dashboard-sidebar">
+                <!-- Weather Card -->
+                <div class="weather-card">
+                    <div class="weather-header">
+                        <h3 class="weather-title">Météo Extérieure</h3>
+                        <span class="status online">API OpenWeather</span>
+                    </div>
+                    
+                    <div class="weather-main">
+                        <div class="weather-icon" id="weatherIcon">⛅</div>
+                        <div class="weather-info">
+                            <h3 id="weatherTemp">18°C</h3>
+                            <p id="weatherCondition">Partiellement nuageux</p>
+                            <p>📍 Paris, France</p>
+                        </div>
+                    </div>
+                    
+                    <div class="weather-details">
+                        <div class="weather-detail">
+                            <span class="detail-label">Humidité</span>
+                            <span class="detail-value" id="weatherHumidity">72%</span>
+                        </div>
+                        <div class="weather-detail">
+                            <span class="detail-label">Vent</span>
+                            <span class="detail-value" id="weatherWind">12 km/h</span>
+                        </div>
+                        <div class="weather-detail">
+                            <span class="detail-label">Pression</span>
+                            <span class="detail-value" id="weatherPressure">1013 hPa</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Alerts -->
+                <div class="alerts-section">
+                    <h3 class="card-title">Alertes</h3>
+                    <div id="alertsSection">
+                        <div class="alert warning">
+                            <span class="alert-icon">⚠️</span>
+                            <span>Température légèrement élevée</span>
+                            <button class="alert-close">×</button>
+                        </div>
+                        <div class="alert success">
+                            <span class="alert-icon">✅</span>
+                            <span>Système fonctionne normalement</span>
+                            <button class="alert-close">×</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Notifications Container -->
+    <div id="notificationsContainer" class="notifications-container"></div>
+
+    <script src="dashboard.js"></script>
+    <script src="auth.js"></script>
+    <script>
+        // Time period buttons
+        document.querySelectorAll('.time-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                // Trigger data update based on period
+                const period = this.dataset.period;
+                console.log('Period changed to:', period);
+            });
+        });
+
+        // Control buttons
+        function toggleWatering() {
+            const btn = document.getElementById('wateringBtn');
+            const isActive = btn.classList.contains('active');
+            btn.classList.toggle('active');
+            btn.innerHTML = isActive ? '<span>💧</span><span>Activer</span>' : '<span>💧</span><span>Désactiver</span>';
+        }
+
+        function toggleVentilation() {
+            const btn = document.getElementById('ventilationBtn');
+            const isActive = btn.classList.contains('active');
+            btn.classList.toggle('active');
+            btn.innerHTML = isActive ? '<span>💨</span><span>Activer</span>' : '<span>💨</span><span>Désactiver</span>';
+        }
+
+        function toggleLighting() {
+            const btn = document.getElementById('lightingBtn');
+            const isActive = btn.classList.contains('active');
+            btn.classList.toggle('active');
+            btn.innerHTML = isActive ? '<span>💡</span><span>Activer</span>' : '<span>💡</span><span>Désactiver</span>';
+        }
+
+        // Alert close buttons
+        document.querySelectorAll('.alert-close').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.parentElement.remove();
+            });
+        });
+
+        // Auto mode toggle
+        document.getElementById('autoMode').addEventListener('change', function() {
+            const isChecked = this.checked;
+            console.log('Auto mode:', isChecked ? 'enabled' : 'disabled');
+        });
+    </script>
+</body>
+</html>

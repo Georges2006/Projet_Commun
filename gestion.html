@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <title>Gestion - SerreConnect</title>
+    <meta content="Interface d'administration pour la gestion complète de votre serre connectée" name="description"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="gestion.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-brand">
+                <div class="logo">
+                    <span style="font-size: 1.5rem;">🌱</span>
+                    <span>SerreConnect</span>
+                </div>
+            </a>
+            
+            <div class="nav-menu" id="nav-menu">
+                <a href="/" class="nav-link">Accueil</a>
+                <a href="/capteurs.html" class="nav-link">Capteurs</a>
+                <a href="/contact.html" class="nav-link">Contact</a>
+                <a href="/login.html" class="nav-link auth-link" id="authLink">Connexion</a>
+                <a href="/dashboard.html" class="nav-button current" id="dashboardBtn" style="display: none;">
+                    <span>📊</span>
+                    <span>Dashboard</span>
+                </a>
+            </div>
+            
+            <div class="menu-toggle" id="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Dashboard Header -->
+        <div class="dashboard-header">
+            <h1 class="dashboard-title">Gestion du Système</h1>
+            <p class="dashboard-subtitle">Interface d'administration pour la gestion complète de votre serre connectée</p>
+        </div>
+
+        <!-- Main Dashboard Grid -->
+        <div class="dashboard-grid">
+            <!-- Left Column - Main Content -->
+            <div class="dashboard-main">
+                <!-- Onglets de gestion -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h2 class="card-title">Administration</h2>
+                        <div class="card-actions">
+                            <span class="status online">● Système actif</span>
+                        </div>
+                    </div>
+                    
+                    <div class="admin-tabs">
+                        <button class="tab-btn active" data-tab="users">
+                            <span>👥</span>
+                            <span>Utilisateurs</span>
+                        </button>
+                        <button class="tab-btn" data-tab="sensors">
+                            <span>📡</span>
+                            <span>Capteurs</span>
+                        </button>
+                        <button class="tab-btn" data-tab="automation">
+                            <span>🤖</span>
+                            <span>Automatisation</span>
+                        </button>
+                        <button class="tab-btn" data-tab="logs">
+                            <span>📋</span>
+                            <span>Logs</span>
+                        </button>
+                        <button class="tab-btn" data-tab="settings">
+                            <span>⚙️</span>
+                            <span>Paramètres</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Contenu des onglets -->
+                    <div class="tab-content">
+                        <!-- Onglet Utilisateurs -->
+                        <div id="users" class="tab-panel active">
+                            <div class="panel-header">
+                                <h3>Gestion des Utilisateurs</h3>
+                                <button class="btn btn-primary" onclick="showAddUserModal()">
+                                    <span>➕</span>
+                                    <span>Ajouter un utilisateur</span>
+                                </button>
+                            </div>
+                            
+                            <div class="users-grid">
+                                <div class="user-card">
+                                    <div class="user-avatar">👤</div>
+                                    <div class="user-info">
+                                        <h3>Jean Dupont</h3>
+                                        <p>jean.dupont@email.com</p>
+                                        <span class="user-role admin">Administrateur</span>
+                                    </div>
+                                    <div class="user-actions">
+                                        <button class="btn-icon" onclick="editUser(1)">✏️</button>
+                                        <button class="btn-icon" onclick="deleteUser(1)">🗑️</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="user-card">
+                                    <div class="user-avatar">👤</div>
+                                    <div class="user-info">
+                                        <h3>Marie Martin</h3>
+                                        <p>marie.martin@email.com</p>
+                                        <span class="user-role user">Utilisateur</span>
+                                    </div>
+                                    <div class="user-actions">
+                                        <button class="btn-icon" onclick="editUser(2)">✏️</button>
+                                        <button class="btn-icon" onclick="deleteUser(2)">🗑️</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="user-card">
+                                    <div class="user-avatar">👤</div>
+                                    <div class="user-info">
+                                        <h3>Pierre Durand</h3>
+                                        <p>pierre.durand@email.com</p>
+                                        <span class="user-role user">Utilisateur</span>
+                                    </div>
+                                    <div class="user-actions">
+                                        <button class="btn-icon" onclick="editUser(3)">✏️</button>
+                                        <button class="btn-icon" onclick="deleteUser(3)">🗑️</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Onglet Capteurs -->
+                        <div id="sensors" class="tab-panel">
+                            <div class="panel-header">
+                                <h3>Gestion des Capteurs</h3>
+                                <button class="btn btn-primary" onclick="showAddSensorModal()">
+                                    <span>➕</span>
+                                    <span>Ajouter un capteur</span>
+                                </button>
+                            </div>
+                            
+                            <div class="sensors-grid">
+                                <div class="sensor-card">
+                                    <div class="sensor-icon">🌡️</div>
+                                    <div class="sensor-info">
+                                        <h3>Capteur de Température</h3>
+                                        <p>ID: TEMP_001</p>
+                                        <span class="sensor-status online">En ligne</span>
+                                    </div>
+                                    <div class="sensor-actions">
+                                        <button class="btn-icon" onclick="configureSensor('TEMP_001')">⚙️</button>
+                                        <button class="btn-icon" onclick="viewSensorData('TEMP_001')">📊</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="sensor-card">
+                                    <div class="sensor-icon">💧</div>
+                                    <div class="sensor-info">
+                                        <h3>Capteur d'Humidité</h3>
+                                        <p>ID: HUM_001</p>
+                                        <span class="sensor-status online">En ligne</span>
+                                    </div>
+                                    <div class="sensor-actions">
+                                        <button class="btn-icon" onclick="configureSensor('HUM_001')">⚙️</button>
+                                        <button class="btn-icon" onclick="viewSensorData('HUM_001')">📊</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="sensor-card">
+                                    <div class="sensor-icon">☀️</div>
+                                    <div class="sensor-info">
+                                        <h3>Capteur de Luminosité</h3>
+                                        <p>ID: LUX_001</p>
+                                        <span class="sensor-status offline">Hors ligne</span>
+                                    </div>
+                                    <div class="sensor-actions">
+                                        <button class="btn-icon" onclick="configureSensor('LUX_001')">⚙️</button>
+                                        <button class="btn-icon" onclick="viewSensorData('LUX_001')">📊</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Onglet Automatisation -->
+                        <div id="automation" class="tab-panel">
+                            <div class="panel-header">
+                                <h3>Règles d'Automatisation</h3>
+                                <button class="btn btn-primary" onclick="showAddRuleModal()">
+                                    <span>➕</span>
+                                    <span>Ajouter une règle</span>
+                                </button>
+                            </div>
+                            
+                            <div class="automation-grid">
+                                <div class="rule-card">
+                                    <div class="rule-header">
+                                        <h3>Irrigation Automatique</h3>
+                                        <label class="switch">
+                                            <input type="checkbox" checked>
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="rule-content">
+                                        <p><strong>Condition:</strong> Si l'humidité < 30%</p>
+                                        <p><strong>Action:</strong> Activer l'irrigation pendant 5 minutes</p>
+                                    </div>
+                                    <div class="rule-actions">
+                                        <button class="btn-icon" onclick="editRule(1)">✏️</button>
+                                        <button class="btn-icon" onclick="deleteRule(1)">🗑️</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="rule-card">
+                                    <div class="rule-header">
+                                        <h3>Ventilation Température</h3>
+                                        <label class="switch">
+                                            <input type="checkbox" checked>
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="rule-content">
+                                        <p><strong>Condition:</strong> Si la température > 28°C</p>
+                                        <p><strong>Action:</strong> Activer la ventilation</p>
+                                    </div>
+                                    <div class="rule-actions">
+                                        <button class="btn-icon" onclick="editRule(2)">✏️</button>
+                                        <button class="btn-icon" onclick="deleteRule(2)">🗑️</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Onglet Logs -->
+                        <div id="logs" class="tab-panel">
+                            <div class="panel-header">
+                                <h3>Logs Système</h3>
+                                <button class="btn btn-secondary" onclick="exportLogs()">
+                                    <span>📥</span>
+                                    <span>Exporter</span>
+                                </button>
+                            </div>
+                            
+                            <div class="log-filters">
+                                <select>
+                                    <option>Tous les niveaux</option>
+                                    <option>Info</option>
+                                    <option>Warning</option>
+                                    <option>Error</option>
+                                </select>
+                                <select>
+                                    <option>Dernières 24h</option>
+                                    <option>Dernière semaine</option>
+                                    <option>Dernier mois</option>
+                                </select>
+                            </div>
+                            
+                            <div class="logs-container">
+                                <div class="log-entry info">
+                                    <div class="log-timestamp">2025-06-20 14:30:15</div>
+                                    <div class="log-level info">INFO</div>
+                                    <div class="log-message">Système démarré avec succès</div>
+                                </div>
+                                <div class="log-entry warning">
+                                    <div class="log-timestamp">2025-06-20 14:25:10</div>
+                                    <div class="log-level warning">WARNING</div>
+                                    <div class="log-message">Température légèrement élevée: 26°C</div>
+                                </div>
+                                <div class="log-entry error">
+                                    <div class="log-timestamp">2025-06-20 14:20:05</div>
+                                    <div class="log-level error">ERROR</div>
+                                    <div class="log-message">Capteur de luminosité hors ligne</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Onglet Paramètres -->
+                        <div id="settings" class="tab-panel">
+                            <div class="panel-header">
+                                <h3>Paramètres Système</h3>
+                                <button class="btn btn-primary" onclick="saveSettings()">
+                                    <span>💾</span>
+                                    <span>Sauvegarder</span>
+                                </button>
+                            </div>
+                            
+                            <div class="settings-grid">
+                                <div class="settings-section">
+                                    <h3>Notifications</h3>
+                                    <div class="setting-item">
+                                        <label>Alertes par email</label>
+                                        <input type="checkbox" checked>
+                                    </div>
+                                    <div class="setting-item">
+                                        <label>Notifications push</label>
+                                        <input type="checkbox" checked>
+                                    </div>
+                                    <div class="setting-item">
+                                        <label>Fréquence des rapports</label>
+                                        <select>
+                                            <option>Quotidien</option>
+                                            <option>Hebdomadaire</option>
+                                            <option>Mensuel</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="settings-section">
+                                    <h3>Sécurité</h3>
+                                    <div class="setting-item">
+                                        <label>Authentification à deux facteurs</label>
+                                        <input type="checkbox">
+                                    </div>
+                                    <div class="setting-item">
+                                        <label>Session timeout (minutes)</label>
+                                        <input type="number" value="30">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column - Sidebar -->
+            <div class="dashboard-sidebar">
+                <!-- Statistiques système -->
+                <div class="weather-card">
+                    <div class="weather-header">
+                        <h3 class="weather-title">Statistiques Système</h3>
+                        <span class="status online">● Actif</span>
+                    </div>
+                    
+                    <div class="weather-main">
+                        <div class="weather-icon">📊</div>
+                        <div class="weather-info">
+                            <h3>99.8%</h3>
+                            <p>Uptime système</p>
+                            <p>📍 Depuis 30 jours</p>
+                        </div>
+                    </div>
+                    
+                    <div class="weather-details">
+                        <div class="weather-detail">
+                            <span class="detail-label">Utilisateurs</span>
+                            <span class="detail-value">12</span>
+                        </div>
+                        <div class="weather-detail">
+                            <span class="detail-label">Capteurs</span>
+                            <span class="detail-value">8/10</span>
+                        </div>
+                        <div class="weather-detail">
+                            <span class="detail-label">Règles actives</span>
+                            <span class="detail-value">5</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Alertes système -->
+                <div class="alerts-section">
+                    <h3 class="card-title">Alertes Système</h3>
+                    <div id="alertsSection">
+                        <div class="alert warning">
+                            <span class="alert-icon">⚠️</span>
+                            <span>Capteur LUX_001 hors ligne</span>
+                            <button class="alert-close">×</button>
+                        </div>
+                        <div class="alert success">
+                            <span class="alert-icon">✅</span>
+                            <span>Tous les autres capteurs en ligne</span>
+                            <button class="alert-close">×</button>
+                        </div>
+                        <div class="alert warning">
+                            <span class="alert-icon">⚠️</span>
+                            <span>Mise à jour système disponible</span>
+                            <button class="alert-close">×</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Notifications Container -->
+    <div id="notificationsContainer" class="notifications-container"></div>
+
+    <script src="dashboard.js"></script>
+    <script src="auth.js"></script>
+    <script>
+        // Tab switching
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const targetTab = this.getAttribute('data-tab');
+                
+                // Update tab buttons
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Update tab panels
+                document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
+                document.getElementById(targetTab).classList.add('active');
+            });
+        });
+
+        // Alert close buttons
+        document.querySelectorAll('.alert-close').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.parentElement.remove();
+            });
+        });
+
+        // Admin functions
+        function showAddUserModal() {
+            console.log('Show add user modal');
+            // TODO: Implement modal
+        }
+
+        function editUser(id) {
+            console.log('Edit user:', id);
+            // TODO: Implement edit
+        }
+
+        function deleteUser(id) {
+            console.log('Delete user:', id);
+            // TODO: Implement delete
+        }
+
+        function showAddSensorModal() {
+            console.log('Show add sensor modal');
+            // TODO: Implement modal
+        }
+
+        function configureSensor(id) {
+            console.log('Configure sensor:', id);
+            // TODO: Implement configure
+        }
+
+        function viewSensorData(id) {
+            console.log('View sensor data:', id);
+            // TODO: Implement view data
+        }
+
+        function showAddRuleModal() {
+            console.log('Show add rule modal');
+            // TODO: Implement modal
+        }
+
+        function editRule(id) {
+            console.log('Edit rule:', id);
+            // TODO: Implement edit
+        }
+
+        function deleteRule(id) {
+            console.log('Delete rule:', id);
+            // TODO: Implement delete
+        }
+
+        function exportLogs() {
+            console.log('Export logs');
+            // TODO: Implement export
+        }
+
+        function saveSettings() {
+            console.log('Save settings');
+            // TODO: Implement save
+        }
+    </script>
+</body>
+</html>

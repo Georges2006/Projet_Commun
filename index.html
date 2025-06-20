@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SerreConnect - Gestion Intelligente de Serre</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="auth.js">
+</head>
+<body>
+    <!-- Conteneur de notifications -->
+    <div id="notificationsContainer" class="notifications-container"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-icon">🌱</span>
+                <span class="logo-text">SerreConnect</span>
+            </div>
+            
+            <div class="nav-menu">
+                <a href="#home" class="nav-link">Accueil</a>
+                <a href="#features" class="nav-link">Fonctionnalités</a>
+                <a href="#about" class="nav-link">À propos</a>
+                <a href="#contact" class="nav-link">Contact</a>
+                <a href="/gestion" class="nav-link admin-only" style="display: none;">Gestion</a>
+            </div>
+            
+            <div class="nav-actions">
+                <a href="/dashboard" id="dashboardBtn" class="btn btn-secondary" style="display: none;">
+                    <span>📊</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="/login" id="authLink" class="btn btn-primary">
+                    <span>🔐</span>
+                    <span>Connexion</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Section Hero -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Gestion Intelligente de <span class="highlight">Serre</span>
+                </h1>
+                <p class="hero-description">
+                    Surveillez et contrôlez votre serre en temps réel avec notre système connecté. 
+                    Optimisez la croissance de vos plantes grâce aux données précises et à l'automatisation intelligente.
+                </p>
+                <div class="hero-actions">
+                    <a href="/dashboard" class="btn btn-primary btn-large">
+                        <span>🚀</span>
+                        <span>Commencer</span>
+                    </a>
+                    <a href="#features" class="btn btn-outline btn-large">
+                        <span>📋</span>
+                        <span>En savoir plus</span>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="hero-visual">
+                <div class="hero-image">
+                    <div class="floating-card card-1">
+                        <div class="card-icon">🌡️</div>
+                        <div class="card-content">
+                            <div class="card-value" id="tempValue">24.5°C</div>
+                            <div class="card-label">Température</div>
+                        </div>
+                    </div>
+                    
+                    <div class="floating-card card-2">
+                        <div class="card-icon">💧</div>
+                        <div class="card-content">
+                            <div class="card-value" id="humidityValue">65%</div>
+                            <div class="card-label">Humidité</div>
+                        </div>
+                    </div>
+                    
+                    <div class="floating-card card-3">
+                        <div class="card-icon">☀️</div>
+                        <div class="card-content">
+                            <div class="card-value" id="lightValue">850 lux</div>
+                            <div class="card-label">Luminosité</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Statistiques -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">📊</div>
+                    <div class="stat-number">99.9%</div>
+                    <div class="stat-label">Précision des capteurs</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⚡</div>
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Surveillance continue</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🌱</div>
+                    <div class="stat-number">+40%</div>
+                    <div class="stat-label">Croissance optimisée</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-number">-30%</div>
+                    <div class="stat-label">Économies d'eau</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Fonctionnalités -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Fonctionnalités Avancées</h2>
+                <p class="section-description">
+                    Découvrez les outils qui révolutionnent la gestion de votre serre
+                </p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📡</div>
+                    <h3 class="feature-title">Capteurs en Temps Réel</h3>
+                    <p class="feature-description">
+                        Surveillance continue de la température, humidité et luminosité avec des données précises et actualisées.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3 class="feature-title">Automatisation Intelligente</h3>
+                    <p class="feature-description">
+                        Contrôle automatique des systèmes d'irrigation et de ventilation selon les conditions optimales.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3 class="feature-title">Interface Mobile</h3>
+                    <p class="feature-description">
+                        Accédez à votre serre depuis n'importe où avec notre application mobile responsive.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3 class="feature-title">Analyses Avancées</h3>
+                    <p class="feature-description">
+                        Graphiques détaillés et rapports pour optimiser la performance de votre serre.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🌤️</div>
+                    <h3 class="feature-title">Météo Intégrée</h3>
+                    <p class="feature-description">
+                        Intégration avec les prévisions météo pour anticiper les changements climatiques.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔔</div>
+                    <h3 class="feature-title">Alertes Intelligentes</h3>
+                    <p class="feature-description">
+                        Notifications en temps réel pour les événements importants et les actions requises.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section À propos -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2 class="section-title">À Propos de SerreConnect</h2>
+                    <p class="about-description">
+                        SerreConnect est une solution innovante qui combine technologie IoT et intelligence artificielle 
+                        pour optimiser la gestion des serres agricoles. Notre plateforme permet aux agriculteurs et 
+                        jardiniers de maximiser leurs rendements tout en minimisant les ressources utilisées.
+                    </p>
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <span class="feature-check">✅</span>
+                            <span>Technologie de pointe</span>
+                        </div>
+                        <div class="about-feature">
+                            <span class="feature-check">✅</span>
+                            <span>Support 24/7</span>
+                        </div>
+                        <div class="about-feature">
+                            <span class="feature-check">✅</span>
+                            <span>Interface intuitive</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div class="image-placeholder">
+                        <span>🏗️</span>
+                        <p>Serre Connectée</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Contact -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Contactez-Nous</h2>
+                <p class="section-description">
+                    Des questions ? Notre équipe est là pour vous aider
+                </p>
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <div class="contact-details">
+                            <h3>Email</h3>
+                            <p>contact@serreconnect.fr</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div class="contact-details">
+                            <h3>Téléphone</h3>
+                            <p>+33 1 23 45 67 89</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div class="contact-details">
+                            <h3>Adresse</h3>
+                            <p>123 Rue de l'Innovation<br>75001 Paris, France</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <form>
+                        <div class="form-group">
+                            <input type="text" placeholder="Votre nom" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Votre email" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="Votre message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">
+                            <span>📤</span>
+                            <span>Envoyer le message</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <span class="logo-icon">🌱</span>
+                        <span class="logo-text">SerreConnect</span>
+                    </div>
+                    <p class="footer-description">
+                        La solution intelligente pour la gestion moderne de serres agricoles.
+                    </p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Produit</h3>
+                    <ul class="footer-links">
+                        <li><a href="#features">Fonctionnalités</a></li>
+                        <li><a href="/dashboard">Dashboard</a></li>
+                        <li><a href="#pricing">Tarifs</a></li>
+                        <li><a href="#support">Support</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Entreprise</h3>
+                    <ul class="footer-links">
+                        <li><a href="#about">À propos</a></li>
+                        <li><a href="#team">Équipe</a></li>
+                        <li><a href="#careers">Carrières</a></li>
+                        <li><a href="#press">Presse</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#help">Centre d'aide</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#privacy">Confidentialité</a></li>
+                        <li><a href="#terms">Conditions</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 SerreConnect. Tous droits réservés.</p>
+                <div class="footer-social">
+                    <a href="#" class="social-link">📘</a>
+                    <a href="#" class="social-link">🐦</a>
+                    <a href="#" class="social-link">📷</a>
+                    <a href="#" class="social-link">💼</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="auth.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

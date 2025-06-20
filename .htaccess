@@ -1,0 +1,48 @@
+RewriteEngine On
+
+# Redirection des requêtes API
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# API Authentification
+RewriteRule ^api/auth/register$ api/auth/register.php [L]
+RewriteRule ^api/auth/login$ api/auth/login.php [L]
+RewriteRule ^api/auth/forgot-password$ api/auth/forgot-password.php [L]
+RewriteRule ^api/auth/reset-password$ api/auth/reset-password.php [L]
+RewriteRule ^api/auth/verify-token$ api/auth/verify-token.php [L]
+RewriteRule ^api/auth/logout$ api/auth/logout.php [L]
+
+# API Capteurs
+RewriteRule ^api/sensors/data$ api/sensors/data.php [L]
+RewriteRule ^api/sensors/current$ api/sensors/current.php [L]
+RewriteRule ^api/sensors/history$ api/sensors/history.php [L]
+
+# API Utilisateurs
+RewriteRule ^api/users$ api/users/index.php [L]
+
+# API Contrôles
+RewriteRule ^api/controls/status$ api/controls/status.php [L]
+RewriteRule ^api/controls/toggle$ api/controls/toggle.php [L]
+
+# API Météo
+RewriteRule ^api/weather$ api/weather/index.php [L]
+
+# API Index
+RewriteRule ^api$ api/index.php [L]
+
+# Routes des pages d'authentification
+RewriteRule ^login$ login.html [L]
+RewriteRule ^login\.html$ login.html [L]
+RewriteRule ^register$ login.html [L]
+RewriteRule ^register\.html$ login.html [L]
+RewriteRule ^reset-password$ reset-password.html [L]
+RewriteRule ^reset-password\.html$ reset-password.html [L]
+RewriteRule ^logout$ api/auth/logout.php [L]
+RewriteRule ^api/auth/verify-email$ api/auth/verify-email.php [L]
+
+# Autoriser l'accès aux fichiers statiques
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^.*$ - [L]
+
+# Redirection par défaut vers index-auth.html
+RewriteRule ^.*$ index-auth.html [L]

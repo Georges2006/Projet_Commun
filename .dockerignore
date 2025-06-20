@@ -1,0 +1,48 @@
+ # Fichiers de développement
+.git
+.gitignore
+README.md
+*.md
+
+# Fichiers de logs
+*.log
+logs/
+
+# Fichiers temporaires
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+
+# Fichiers de configuration Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Fichiers de test (si il en reste)
+test_*
+*test*
+
+# Documentation PHPMailer
+PHPMailer-master/README.md
+PHPMailer-master/LICENSE
+PHPMailer-master/SECURITY.md
+PHPMailer-master/COMMITMENT
+PHPMailer-master/SMTPUTF8.md
+PHPMailer-master/VERSION
+PHPMailer-master/composer.json
+PHPMailer-master/get_oauth_token.php
+PHPMailer-master/language/
+
+# Fichiers de backup
+*.bak
+*.backup
+
+# Fichiers de cache
+.cache/
+cache/
+
+# Fichiers d'environnement (sauf exemple)
+.env
+.env.local
+.env.production
